@@ -10,7 +10,8 @@ Setup:
 
 GitHub:
 1. **Create empty repo in GitHub**
-2. **Change origin's URL** - git remote set-url origin http://github.com/new_repo
+2. **Change origin's URL** - git remote set-url origin http://github.com/new_repo -> (to make sure it was updated) git config --get remote.origin.url 
+3. **Push local repo to remote** - git push origin master
 
 API:
 1. **Create new api app** - python manage.py startapp api
