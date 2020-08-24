@@ -1,7 +1,13 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from .serializers import TodoSerializer, TodoCompleteSerializer
 from todo.models import Todo
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.db import IntegrityError
+from django.contrib.auth import login
 
 
 # to view list of ALL todos
@@ -61,3 +67,19 @@ class TodoCompleteUpdate(generics.UpdateAPIView):
     def perform_update(self, serializer):
         serializer.instance.datecompleted = timezone.now()  # set auto
         serializer.save()
+
+
+# to create new user and login (only POST allowed)
+@csrf_exempt
+def signup(request):
+    if request.method == 'POST':
+        try:
+            data = JSONParser().parse(request)
+            user = User.objects.create_user(user=data['username'], password=data['password'])
+            user.save()
+            login(request, user)
+            return JsonResponse({'token': 'we34ffv`112@#__)$)$@fxgf5'}, status=status.HTTP_201_CREATED)
+        except IntegrityError:
+            return JsonResponse({'error': 'That username is already taken'}, status=status.HTTP_400_BAD_REQUEST)
+
+    return JsonResponse({'error': 'Only POST methods are supported.'}, status=status.HTTP_400_BAD_REQUEST)

@@ -21,4 +21,7 @@ API:
 5. **Create serializer.py with model serialiser**
 6. **Create view in api/view.py** - use todo/views.py to see the queryset used for Front-End
 7. **Use website login/logout functionality to test API**
-8. **Repeat steps urls + views (4 and 6) for API calls** 
+8. **Repeat steps urls + serialiers + views (4, 5, 6) for API calls** 
+
+Authentication:
+1. **Create signup endpoint**
