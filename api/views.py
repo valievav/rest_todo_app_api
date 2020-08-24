@@ -102,3 +102,4 @@ def login(request):
 
         return JsonResponse({'token': str(token)}, status=status.HTTP_200_OK)
 
+    return JsonResponse({'error': 'Only POST methods are supported.'}, status=status.HTTP_400_BAD_REQUEST)

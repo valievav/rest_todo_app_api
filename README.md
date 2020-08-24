@@ -1,6 +1,16 @@
-API for external TODO project.
+API for external Todo project (5 endpoints + 2 for auth).
 
+Project:
+![project](readme_img/todo_project.png)
 
+API:
+![todo](readme_img/todo_list.png)
+![todo_current](readme_img/todo_current.png)
+![todo_completed](readme_img/todo_completed.png)
+![todo_id](readme_img/todo_id.png)
+![todo_id_complete](readme_img/todo_id_complete.png)
+![signup](readme_img/signup.png)
+![login](readme_img/login.png)
 ---
 
 WORKFLOW:
@@ -32,16 +42,16 @@ Authentication (assigning token for user-password pair):
 ```
 curl -X POST http://localhost:8000/api/signup/ -H "Content-Type: application/json" -d "{ \"username\": \"***\", \"password\": \"***\"}" 
 # response {"token": key}
+# IMPORTANT: use double quotes for cURL ONLY in Windows cmd, single quotes don't work! Escape double quotes with backslash.
 ```
-*IMPORTANT: use double quotes for cURL ONLY in Windows cmd, single quotes don't work! Escape double quotes with backslash.*
 6. **Get token from the response**
 7. **Check Token in Admin**
 8. **Use token for API requests (user-password pair won't work anymore since we specified TokenAuthentication in settings)**
 ```
 curl http://127.0.0.1:8000/api/todos/ -H "Authorization: Token ***********"
 # response list of todos
+# IMPORTANT: use double quotes for cURL ONLY in Windows cmd, single quotes don't work!
 ```
-*IMPORTANT: use double quotes for cURL ONLY in Windows cmd, single quotes don't work!*
 9. **Create api/login endpoint to get token**
 10. **Make call to the login endpoint**
 ```
